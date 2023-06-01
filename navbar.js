@@ -7,6 +7,7 @@ createApp({
       isLogged: false,
       userInfo: null,
       userToken: null,
+      btnClicked: false,
       graphUrl: "https://core.dev.beatstars.net/studio/graphql"
     }
   },
@@ -36,6 +37,17 @@ createApp({
     });
   },
   methods: {
+    showZendesk(){
+        if(!this.btnClicked){
+          window.zE(() => {
+            window.zE.activate()
+          });
+          return this.btnClicked = true
+        }
+
+        window.zE.hide();
+        return this.btnClicked = false
+    },
     getUserToken(){
       console.log("getUserToken function ran!")
       //Get token from the URL
