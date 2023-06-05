@@ -118,7 +118,7 @@ createApp({
         })
     },
     login(){
-      window.location.replace(`https://oauth.beatstars.com/verify?version=3.14.0&origin=${window.location.href}&send_callback=true`)
+      window.location.replace(`https://oauth.dev.beatstars.net/verify?version=3.14.0&origin=${window.location.href}&send_callback=true`)
     },
     logout(){
       //DESTROY ALL COKKIES
