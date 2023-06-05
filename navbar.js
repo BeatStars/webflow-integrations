@@ -6,7 +6,7 @@ createApp({
       isLogged: false,
       userInfo: null,
       userToken: null,
-      graphUrl: "https://core.prod.beatstars.net/studio/graphql"
+      graphUrl: "https://core.dev.beatstars.net/studio/graphql"
     }
   },
   async beforeMount() {
