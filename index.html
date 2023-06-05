@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+    <!-- OneTrust Cookies Consent Notice start for beatstars.com -->
+    <script async src="https://cdn.cookielaw.org/consent/19332dfa-9556-4e48-934e-6d437d247e7b-test/otSDKStub.js"
+        data-document-language="true" type="text/javascript" charset="UTF-8"
+        data-domain-script="19332dfa-9556-4e48-934e-6d437d247e7b-test"></script>
+    <!-- OneTrust Cookies Consent Notice end for beatstars.com -->
+</head>
+
+<body>
+    Test<br>
+    <button id="a">aaaaaaaa</button><br>
+    <!-- <a id="ot-sdk-btn" href="#" class="footer-link is--sm ot-sdk-show-settings">Cookies Settings</a> -->
+
+    <script type="module">
+        let btn = document.getElementById("a")
+        btn.addEventListener('click', function(){
+            changeCookieDomain('OptanonConsent', 'beatstars.com')
+        })
+
+        function changeCookieDomain(cookieName, newDomain) {
+            // Retrieve all cookies as an array
+            var cookies = document.cookie.split(';');
+
+            // Loop through the cookies
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i];
+
+                // Trim any leading or trailing whitespace
+                while (cookie.charAt(0) === ' ') {
+                    cookie = cookie.substring(1);
+                }
+
+                // Check if the cookie name matches
+                if (cookie.indexOf(cookieName + '=') === 0) {
+                    // Get the cookie value and other attributes
+                    var cookieParts = cookie.split('=');
+                    var cookieValue = cookieParts
+                    var cookieValues = cookieValue.shift();
+                    var cookieAttributes = cookieParts[0].split(';');
+
+                    // Create a new cookie with the updated domain
+                    var newCookie = cookieName + '=' + cookieParts.toString().replace(/,/g, "=") + ';';
+
+                    // Set the new domain
+                    newCookie += 'domain=' + newDomain + ';';
+
+                    // Set other attributes for the new cookie
+                    for (var j = 1; j < cookieAttributes.length; j++) {
+                        var attribute = cookieAttributes[j].trim();
+                        if (attribute.toLowerCase().indexOf('domain=') !== 0) {
+                            newCookie += attribute + ';';
+                        }
+                    }
+
+                    // Set the new cookie
+                    console.log(newCookie)
+                    document.cookie = newCookie;
+                    
+                    // Delete the original cookie
+                    document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+                    
+                    console.log(cookieName + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;')
+                    // Exit the loop since we found the cookie
+                    break;
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>
