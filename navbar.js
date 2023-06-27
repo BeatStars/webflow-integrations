@@ -120,6 +120,9 @@ createApp({
     login(){
       window.location.replace(`https://oauth.beatstars.com/verify?version=3.14.0&origin=${window.location.href}&send_callback=true`)
     },
+    openProfile(){
+      window.location.replace(`https://beatstars.com/${this.userInfo.profile.username}`) 
+    },
     logout(){
       //DESTROY ALL COKKIES
       //AND LOCAL STORAGE
