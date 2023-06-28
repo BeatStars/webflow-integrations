@@ -55,6 +55,24 @@ createApp({
       //Access localStorage to get token
       userToken = localStorage.getItem("access_token")
       if(userToken) return userToken
+
+      //Access cookies to get token
+      cookies = document.cookie.split(";")
+      cookieName = "access_token=";
+
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        
+        // Verify
+        if (cookie.indexOf(cookieName) === 0) {
+          accessToken = cookie.substring(cookieName.length, cookie.length);
+          // Add token to localStorage
+          localStorage.setItem('access_token', accessToken);
+          userToken = accessToken
+          return userToken;
+        }
+      }
+
       //Returns userToken as false
       return false
     },
