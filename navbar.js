@@ -46,12 +46,20 @@ createApp({
       //Get token from the URL
       userUrl = window.location.search;
       urlParams = new URLSearchParams(userUrl)
-      userToken = urlParams.get('access_token')
+      userToken = urlParams.get('access_token')      
       
       if(userToken){
-        localStorage.setItem('access_token', userToken)
+        localStorage.setItem('access_token', userToken);
+
+        let refreshToken = urlParams.get('refresh_token');
+        localStorage.setItem('refresh_token', refreshToken);
+        
+        let expirationDate = urlParams.get('expiration_date');
+        localStorage.setItem('access_token_expiration', expirationDate);
+
         return userToken
       }
+      
       //Access localStorage to get token
       userToken = localStorage.getItem("access_token")
       if(userToken) return userToken
@@ -144,8 +152,14 @@ createApp({
     logout(){
       //DESTROY ALL COKKIES
       //AND LOCAL STORAGE
-      localStorage.clear();
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("expiration_date");
+      localStorage.removeItem("access_token_expiration");
+
+      //Change Status to Update Vue UI
       this.islogged = false
+
+      //Remove URL params for prevent infinite loop
       currentUrl = window.location.href;
       url = new URL(currentUrl);
       url.search = '';
