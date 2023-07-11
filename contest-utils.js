@@ -1,3 +1,30 @@
+import { PROD_URL } from "https://cdn.jsdelivr.net/gh/BeatStars/webflow-integrations/config.js";
+
+/* START
+    Get Total Votes per Entry
+*/
+const submissionCards = document.querySelectorAll("[submissionCard]")
+fetch(PROD_URL + '/total-votes/')
+  .then(response => response.json())
+  .then(json => {
+    let videoIds = Object.keys(json); //Get IDs from backend response - FROM AIRTABLE
+    let totalVotes = Object.values(json); //Get totalVotes from backend response - AIRTABLE.length
+
+    submissionCards.forEach(card => {
+      let voteNumber = card.querySelector(".vote_number"); /*Get all Cards from listing*/
+      let entryHasVote = videoIds.includes(voteNumber.id); /*Check if IDs from backend has IDs from list*/
+
+      if (!entryHasVote) return
+
+      let getIndex = videoIds.indexOf(voteNumber.id)
+      voteNumber.innerText = totalVotes[getIndex]
+    })
+  })
+/* END
+    Get Total Votes per Entry
+*/
+
+
 /* START
     Reduce length of long
     strings on contest
