@@ -65,7 +65,7 @@ $("#newEntryForm").submit(function (e) {
     }
 
     //console.log(json)
-    window.location.href = `${window.location.hostname}/entry/${json.data.slug}?banner=true`
+    window.location.href = `https://${window.location.hostname}/entry/${json.data.slug}?banner=true`
   })
     .catch(err => {
     console.log(err)
