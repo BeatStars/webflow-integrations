@@ -1,7 +1,7 @@
 import { signOut } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
 
 
-export function updateUserUI(userData) {
+export function updateUserUI(userData, userAuth) {
     let loggedNav = document.getElementById("votingAs");
     let loginBanner = document.getElementById("login_banner");
 
@@ -20,7 +20,7 @@ export function updateUserUI(userData) {
 `
     const logoutButton = document.getElementById("logout-button");
     logoutButton.addEventListener("click", function () {
-        signOut(auth).then(() => {
+        signOut(userAuth).then(() => {
             window.location.reload()
         }).catch((error) => { });
     })
