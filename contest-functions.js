@@ -20,30 +20,30 @@ export function updateUserUI(userData, userAuth) {
           </div>
       </div>
   `
-      const logoutButton = document.getElementById("logout-button");
-      logoutButton.addEventListener("click", function () {
-          signOut(userAuth).then(() => {
-              window.location.reload()
-          }).catch((error) => { });
-      })
-  }
+    const logoutButton = document.getElementById("logout-button");
+    logoutButton.addEventListener("click", function () {
+        signOut(userAuth).then(() => {
+            window.location.reload()
+        }).catch((error) => { });
+    })
+}
 
-  function renderLoginMethod(providerId){
-      let html;
-      switch (providerId) {
-          case "google.com":
-              html = `
+function renderLoginMethod(providerId) {
+    let html;
+    switch (providerId) {
+        case "google.com":
+            html = `
                   <img src="https://www.transparentpng.com/thumb/google-logo/google-logo-png-icon-free-download-SUF63j.png" style="position: absolute; right: 0; bottom: 0; width: 16px; height: 16px" />
               `
-              break;
-          case "twitter.com":
-              html =`
+            break;
+        case "twitter.com":
+            html = `
                   <img src="https://cdn4.iconfinder.com/data/icons/social-media-icons-the-circle-set/48/twitter_circle-512.png" style="position: absolute; right: 0; bottom: 0; width: 16px; height: 16px" />
               `
-              break;
-      }
+            break;
+    }
     return html
-  }
+}
 
 export function callVote(btn, userInfo, origin, url) {
     console.log("Button clicked")
@@ -84,7 +84,7 @@ export function getUserToken() {
     return null;
 }
 
-export function callError (title, message){
+export function callError(title, message) {
     let toast = document.getElementById("toastMessage");
     let toastHeading = document.getElementById("toastHeading");
     let toastText = document.getElementById("toastText");
@@ -103,4 +103,15 @@ export function callError (title, message){
         toast.style.transition = "all 650ms"
         toast.classList.remove("error")
     }, 5000);
+}
+export function handleLoginBanner() {
+    let loginBanner = document.getElementById("login_banner");
+    
+    if (loginBanner.style.opacity === "1") { //hide the banner
+        return
+    }
+
+    loginBanner.style.opacity = "1"
+    loginBanner.style.marginBottom = "32px"
+    loginBanner.style.transition = "all 650ms"
 }
