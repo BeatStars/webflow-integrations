@@ -1,7 +1,7 @@
 import { signOut } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
 
 
-function updateUserUI(userData, userAuth) {
+export function updateUserUI(userData, userAuth) {
     let loggedNav = document.getElementById("votingAs");
     let loginBanner = document.getElementById("login_banner");
 
