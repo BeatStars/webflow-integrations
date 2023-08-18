@@ -155,9 +155,10 @@ createApp({
       localStorage.removeItem("access_token");
       localStorage.removeItem("expiration_date");
       localStorage.removeItem("access_token_expiration");
-      Cookies.remove('access_token');
-      Cookies.remove('expiration_date');
-      Cookies.remove('access_token_expiration');
+      // Limpar cookies
+      this.deleteCookie('access_token');
+      this.deleteCookie('expiration_date');
+      this.deleteCookie('access_token_expiration');
 
       //Change Status to Update Vue UI
       this.islogged = false
@@ -168,6 +169,9 @@ createApp({
       url.search = '';
       const modifiedUrl = url.href;
       window.location.replace(modifiedUrl);
+    },
+    deleteCookie(name) {
+      document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     }
   }
 }).mount('#navbar')
