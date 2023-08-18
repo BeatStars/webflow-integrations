@@ -155,6 +155,9 @@ createApp({
       localStorage.removeItem("access_token");
       localStorage.removeItem("expiration_date");
       localStorage.removeItem("access_token_expiration");
+      Cookies.remove('access_token');
+      Cookies.remove('expiration_date');
+      Cookies.remove('access_token_expiration');
 
       //Change Status to Update Vue UI
       this.islogged = false
