@@ -9,8 +9,8 @@
  * webflowApi - API to send Publishing Data
  * *************************/
 
-import { getCurrencyType } from 'https://slater.app/1147/13054.js';
-import { getUserToken, getMemberDetails } from 'https://slater.app/1147/13066.js';
+import { getCurrencyType } from './../contests/pricing-services.js';
+import { getUserToken, getMemberDetails } from './../contests/users-services.js';
 import { topArtists } from './json-data.js'
 
 const popup = document.getElementById('results');
