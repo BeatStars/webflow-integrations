@@ -40,78 +40,85 @@ query subscriptionProducts($productGroup: ProductGroup, $onlyAvailable: Boolean 
     onlyAvailable: $onlyAvailable
     audienceGroup: $audienceGroup
   ) {
-        trialEligibility {
-      eligible
-      primaryFeatures {
-        text
-        feature
-        __typename
-      }
-      features {
-        feature
-        value
-        productFeatureValueType
-        __typename
-      }
-      duration {
-        trialDurationUnit
-        trialDurationValue
-        __typename
-      }
+    ...SubscriptionProduct
+    __typename
+  }
+}
+fragment SubscriptionProduct on ExposedSubscriptionProduct {
+  title
+  subTitle
+  featureListTitle
+  formerlyDescrption
+  audienceGroup
+  productGroup
+  features {
+    feature
+    label
+    productFeatureValueType
+    value
+    new
+    __typename
+  }
+  primaryFeatures {
+    feature
+    text
+    new
+    __typename
+  }
+  subscriptionFeatures {
+    feature
+    label
+    new
+    available
+    availableInTrial
+    __typename
+  }
+  plans {
+    available
+    chargebeeId
+    duration {
+      unit
+      value
       __typename
     }
-    title
-    subTitle
-    featureListTitle
-    formerlyDescrption
-    audienceGroup
-    productGroup
+    flags {
+      flag
+      label
+      __typename
+    }
+    price {
+      amount
+      currency
+      __typename
+    }
+    pricePerMonth {
+      amount
+      currency
+      __typename
+    }
+    subscribed
+    __typename
+  }
+  trialEligibility {
+    eligible
+    primaryFeatures {
+      text
+      feature
+      __typename
+    }
     features {
       feature
-      label
-      productFeatureValueType
       value
-      new
+      productFeatureValueType
       __typename
     }
-    primaryFeatures {
-      feature
-      text
-      new
-      __typename
-    }
-        subscriptionFeatures {
-      label
-      new
-      available
-    }
-    plans {
-      available
-      chargebeeId
-      duration {
-        unit
-        value
-        __typename
-      }
-      flags {
-        flag
-        label
-        __typename
-      }
-      price {
-        amount
-        currency
-        __typename
-      }
-      pricePerMonth {
-        amount
-        currency
-        __typename
-      }
-      subscribed
+    duration {
+      trialDurationUnit
+      trialDurationValue
       __typename
     }
     __typename
   }
+  __typename
 }
-  `
+`

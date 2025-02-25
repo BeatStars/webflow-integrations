@@ -20,8 +20,6 @@ import {
     getMyEntry
   } from './contests-functions.js'
   
-
-  
   import { getUserToken, getMemberDetails } from './users-services.js';
   
   /* ************************
