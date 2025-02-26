@@ -46,15 +46,41 @@ createApp({
       //Get token from the URL
       userUrl = window.location.search;
       urlParams = new URLSearchParams(userUrl)
-      userToken = urlParams.get('access_token')
+      userToken = urlParams.get('access_token')      
       
       if(userToken){
-        localStorage.setItem('access_token', userToken)
+        localStorage.setItem('access_token', userToken);
+
+        let refreshToken = urlParams.get('refresh_token');
+        localStorage.setItem('refresh_token', refreshToken);
+        
+        let expirationDate = urlParams.get('expiration_date');
+        localStorage.setItem('access_token_expiration', expirationDate);
+
         return userToken
       }
+      
       //Access localStorage to get token
       userToken = localStorage.getItem("access_token")
       if(userToken) return userToken
+
+      //Access cookies to get token
+      cookies = document.cookie.split(";")
+      cookieName = "access_token=";
+
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        
+        // Verify
+        if (cookie.indexOf(cookieName) === 0) {
+          accessToken = cookie.substring(cookieName.length, cookie.length);
+          // Add token to localStorage
+          localStorage.setItem('access_token', accessToken);
+          userToken = accessToken
+          return userToken;
+        }
+      }
+
       //Returns userToken as false
       return false
     },
@@ -120,16 +146,32 @@ createApp({
     login(){
       window.location.replace(`https://oauth.dev.beatstars.net/verify?version=3.14.0&origin=${window.location.href}&send_callback=true`)
     },
+    openProfile(){
+      window.location.replace(`https://beatstars.com/${this.userInfo.profile.username}`) 
+    },
     logout(){
       //DESTROY ALL COKKIES
       //AND LOCAL STORAGE
-      localStorage.clear();
+      this.deleteCookie('access_token');
+      this.deleteCookie('expiration_date');
+      this.deleteCookie('access_token_expiration');
+
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("expiration_date");
+      localStorage.removeItem("access_token_expiration");      
+
+      //Change Status to Update Vue UI
       this.islogged = false
+
+      //Remove URL params for prevent infinite loop
       currentUrl = window.location.href;
       url = new URL(currentUrl);
       url.search = '';
       const modifiedUrl = url.href;
       window.location.replace(modifiedUrl);
+    },
+    deleteCookie(name) {
+      document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     }
   }
 }).mount('#navbar')
