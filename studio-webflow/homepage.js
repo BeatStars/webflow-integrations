@@ -97,7 +97,9 @@ const fullPage = createApp({
   },
   methods: {
     trackGaEvent(event) {
-      gtag("event", event);
+      gtag("event", event, {
+        transport_type: "beacon",
+      });
     },
     getAnchor() {
       return document.URL.split("#").length > 1
