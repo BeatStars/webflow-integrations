@@ -96,6 +96,14 @@ const fullPage = createApp({
     this.isFetching = this.isFetching ? false : this.isFetching;
   },
   methods: {
+    sendGaAndRedirect(event, url, target) {
+      this.trackGaEvent(event);
+      if (target === "_blank") return;
+
+      setTimeout(() => {
+        window.location.href = url;
+      }, 200);
+    },
     trackGaEvent(event) {
       gtag("event", event, {
         transport_type: "beacon",
