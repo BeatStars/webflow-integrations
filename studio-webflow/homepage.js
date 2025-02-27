@@ -8,18 +8,8 @@
  * currentEnv - Get current Env
  * *************************/
 
-import {
-  getProducersPlans,
-  createAnnualPlans,
-  createMonthlyPlans,
-  getCurrencyType,
-} from "./../contests/pricing-services.js";
-
-import {
-  getUserToken,
-  getMemberDetails,
-  logoutUser,
-} from "./../contests/users-services.js";
+import { getProducersPlans, createAnnualPlans, createMonthlyPlans, getCurrencyType } from "./../utils/pricing-functions.js";
+import { getUserToken, getMemberDetails, logoutUser } from "./../utils/users-functions.js";
 
 const fullPage = createApp({
   data() {
@@ -38,30 +28,6 @@ const fullPage = createApp({
       currentPlan: [],
       comparsionTable: [],
       ressetedAnimations: false,
-      featuresNotIncludeds: [
-        "Content ID & More (coming soon)",
-        "Content ID & More (Coming Soon)",
-        "Creators Rights Agency",
-        "Creator Rights Agency Access",
-        "Monthly Beat ID Credit",
-        "1 Monthly Beat ID Credit",
-        "5% Discount on Promote",
-        "50 Lemonaide Credits (AI Melody Generator)",
-        "150 Lemonaide Credits (AI Melody Generator)",
-        "250 Lemonaide Credits (AI Melody Generator)",
-        "BeatStars Publishing",
-        "BeatStars Publishing services",
-        "PROkits Access",
-        "3 Monthly Beat ID Credits",
-        "5% off Promote Campaigns",
-        "$50 Annual Promote Credits",
-        "Seeds by Lemonaide Monthly Credits",
-        "3 Beat ID credits per month",
-        "BeatStars Publishing services",
-        "250 Seeds by Lemonaide monthly credits",
-        "Exclusive savings on Promote campaigns",
-        "Creative Rights Agency Access",
-      ],
     };
   },
   async beforeMount() {
@@ -98,16 +64,15 @@ const fullPage = createApp({
   methods: {
     sendGaAndRedirect(event, url, target) {
       this.trackGaEvent(event);
+
       if (target === "_blank") return;
 
       setTimeout(() => {
         window.location.href = url;
-      }, 200);
+      }, 300);
     },
     trackGaEvent(event) {
-      gtag("event", event, {
-        transport_type: "beacon",
-      });
+      gtag("event", event, {});
     },
     getAnchor() {
       return document.URL.split("#").length > 1
