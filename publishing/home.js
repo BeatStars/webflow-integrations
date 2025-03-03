@@ -250,7 +250,7 @@ const fullPage = createApp({
                     ...tracks,
                     [item.external_ids.isrc]: {
                         "isrc": item.external_ids.isrc,
-                        "artworkUrl": item.album.images[0].url || "",
+                        "artworkUrl": item.album.images[0]?.url || "",
                         "title": item.name,
                         "artist": musicOwners,
                         "percentageOwned": item.percentageOwned
