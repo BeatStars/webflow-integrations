@@ -10,6 +10,7 @@
  * *************************/
 
 import {
+  copyEntryToClipboard,
   sendVoteDataNoToken,
   firebaseLogin,
   firebaseLogout,
