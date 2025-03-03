@@ -1,6 +1,7 @@
 const fullPage = createApp({
     data() {
         return {
+            pageLink: null,
             action: actionUrl,
             showForm: true,
             displayError: false,
@@ -17,7 +18,7 @@ const fullPage = createApp({
             }
         }
     },
-    async beforeMount() { console.log('Vue Loaded!'); },
+    async beforeMount() { console.log('Vue Loaded!'); this.pageLink = window.location.href },
     methods: {
         trackGaEvent(event) {
             gtag('event', event);

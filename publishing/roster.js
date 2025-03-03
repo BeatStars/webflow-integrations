@@ -25,6 +25,7 @@ stepThree.classList.toggle('hide');
 const fullPage = createApp({
     data() {
         return {
+            pageLink: null,
             artists: topArtists,
 
             graphUrl: graphUrl,
@@ -65,6 +66,7 @@ const fullPage = createApp({
     async beforeMount() {
         console.log('Vue Loaded!');
         try {
+            this.pageLink = window.location.href
             // Get user token from user's device
             this.userToken = await getUserToken(window.location.href) || undefined;
             // Check if user is in trial mode if no token is available
