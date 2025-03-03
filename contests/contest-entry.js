@@ -11,6 +11,7 @@
 
 import {
   sendVoteDataNoToken,
+  copyEntryToClipboard,
   firebaseLogin,
   firebaseLogout,
   getVoteCard,
