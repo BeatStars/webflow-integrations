@@ -108,7 +108,7 @@ const fullPage = createApp({
     }
   },
   async beforeMount() {
-    console.log('Vue Loaded!')
+    console.log('Vue Loaded!!!')
     //Get contest ID to make all api calls
     this.contestId = this.getContestId(window.location)
     //Get user token from user's device
@@ -368,8 +368,8 @@ const fullPage = createApp({
           .pageLink + '&send_callback=true&t=dark-theme'
     },
     async logout() {
-      //DESTROY ALL COKKIES
-      //AND LOCAL STORAGE            
+      console.log('Logout')
+      //DESTROY ALL COKKIES AND LOCAL STORAGE            
       this.deleteCookie('access_token');
       this.deleteCookie('expiration_date');
       this.deleteCookie('access_token_expiration');
@@ -386,12 +386,16 @@ const fullPage = createApp({
       //Remove URL params for prevent infinite loop
       let currentUrl = window.location.href;
       let url = new URL(currentUrl);
-      url.search = '';
-      const modifiedUrl = url.href;
 
-      setTimeout(() => {
-        window.location.href = modifiedUrl;
-      }, 1000);
+      if (url.searchParams.get('access_token')) {
+        url.search = '';
+        setTimeout(() => {
+          window.location.href = url.href;
+        }, 400);
+        return
+      }
+
+      setTimeout(() => {window.location.reload()}, 400);
     },
     deleteCookie(name) {
       document.cookie = name +

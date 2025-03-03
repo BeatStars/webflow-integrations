@@ -67,15 +67,6 @@ const fullPage = createApp({
         getMoneyType(value) {
             return getCurrencyType(value, this.plans[0].plans[0].price.currency)
         },
-        getLoginUrl(environment) {
-            const baseUrls = {
-                dev: 'https://oauth.dev.beatstars.net/verify',
-                stage: 'https://oauth.stage.beatstars.net/verify',
-                prod: 'https://oauth.beatstars.com/verify',
-            };
-            const url = baseUrls[environment] || baseUrls.prod;
-            return `${url}?app=WEB_STUDIO&version=3.14.0&origin=${window.location.href}&send_callback=true&t=dark-theme`;
-        },
         getLinkByPlan(name, frequency) {
             const plans = {
                 free: 'free',

@@ -113,7 +113,6 @@ const fullPage = createApp({
 
         onAuthStateChanged(firebaseAuth, (user) => {
             if (!user) return
-            console.log(user)
             this.firebaseUserInfo = user
         });
 
@@ -128,7 +127,6 @@ const fullPage = createApp({
             let response = await getMyEntry(this.userInfo.id, this.contestData.contest_id)
             if (response.status !== 404) {
                 this.userEntry = response.data;
-                console.log(this.userEntry)
             }
         }
         //Validate Token to get user plan to check if there's special promo
@@ -154,23 +152,25 @@ const fullPage = createApp({
             window.history.pushState({}, '', url);
 
             const pageData = await this.getPaginatedList(newPage, this.pageOffset);
+            let votedEntries = document.querySelectorAll('.success')
+            votedEntries.forEach(item => { item.classList.remove('success') })
+
             this.paginatedList = pageData;
             this.submissionList = pageData.result;
         },
-        async handleSearch() {
-            // Atualiza o valor do input
+        preventSubmit(event) {
+            if (event.keyCode !== 13 || Event.key !== "Enter") return
+            event.preventDefault();
+            return
+        },
+        async handleSearch(event) {
             this.searchQuery = event.target.value;
-
-            // Limpa o timer anterior
             clearTimeout(this.debounceTimer);
-
-            // Define um novo timer de 800ms
             this.debounceTimer = setTimeout(() => {
                 this.executeSearch(); // Executa a busca
-            }, 800);
+            }, 300);
         },
         async executeSearch() {
-            console.log("Buscando por:", this.searchQuery);
             this.isSearching = !this.isSearching;
 
             if (this.searchQuery === "") {
@@ -396,7 +396,6 @@ const fullPage = createApp({
     },
     mounted() { },
     updated() {
-        console.log(this.paginatedList)
         this.displayList = this.submissionList
         let anchor = this.getAnchor()
         if (anchor) {
