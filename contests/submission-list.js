@@ -44,6 +44,7 @@ const ggProvider = new GoogleAuthProvider();
 const fullPage = createApp({
     data() {
         return {
+            pageLink: null,
             authUrl: authUrl,
             queryParams: null,
 
