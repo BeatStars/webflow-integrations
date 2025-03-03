@@ -205,7 +205,7 @@ const mainNavbar = createApp({
       },
       popupLogin() {
         let url =
-          `${this.authUrl}verify?version=3.14.0&origin=${window.location.href}&send_callback=true&t=dark-theme`
+          `${this.authUrl}/verify?version=3.14.0&origin=${window.location.href}&send_callback=true&t=dark-theme`
         let CLIENT_URL = window.location.href
         //const popup = window.open(url, "popup", "popup=true, width=500, height=500");
         const popup = this.popupwindow(url, "popup", 600, 600)
