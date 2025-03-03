@@ -395,7 +395,7 @@ const fullPage = createApp({
         return
       }
 
-      setTimeout(() => {window.location.reload()}, 400);
+      setTimeout(() => {window.location.reload()}, 400);  
     },
     deleteCookie(name) {
       document.cookie = name +

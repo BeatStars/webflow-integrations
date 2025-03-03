@@ -98,6 +98,7 @@ const fullPage = createApp({
     },
     async beforeMount() {
         console.log('Vue Loaded!')
+        this.pageLink = window.location.href
         this.elegibleBrowser = isInAppBrowser()
 
         this.urlParams = this.getConfigFromUrl(window.location)
