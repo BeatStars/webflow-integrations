@@ -39,26 +39,8 @@ import { getUserToken, getMemberDetails } from './../utils/users-functions.js';
     methods: {
       getMoneyType(value) { return getCurrencyType(value, this.plan?.plans[0]?.price.currency) }
     },
-    mounted() {
-      // this.$nextTick(function () {
-      //   //RE-INIT WF as Vue.js init breaks WF interactions
-      //   Webflow.destroy();
-      //   Webflow.ready();
-      //   Webflow.require('ix2').init();
-      // });
-    },
-    updated() {
-      // Webflow.destroy();
-      // Webflow.ready();
-      // Webflow.require('ix2').init();
-  
-      let placeholder = document.getElementById('iframe-placeholder')
-  
-      // this.$nextTick(function () {
-      //   //RE-INIT WF as Vue.js init breaks WF interactions
-  
-      // });
-    },
+    mounted() {},
+    updated() {},
   });
   
   fullPage.mount('#app')
